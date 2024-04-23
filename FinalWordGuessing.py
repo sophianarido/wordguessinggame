@@ -34,4 +34,30 @@ max_guesses = 3
 
 for player in range(1, num_players + 1):
         print(f"Player {player}'s turn:")
-        
+        # Loop for every player's guess 
+        while True:
+            guess = input("Enter a letter: ").upper()
+
+            if len(guess) == 1 and guess.isalpha():
+                if guess in guesses:
+                    print("You already guessed that letter.")
+                else:
+                    guesses.append(guess)
+                    instances = secret_word.count(guess)
+                    if instances > 0:
+                        print(f"There are {instances} patterns of '{guess}' in the secret word.")
+                    else:
+                        print(f"'{guess}' is not in the secret word.")
+
+                    if all(letter in guesses for letter in secret_word):
+                        print(f"Congratulations! Player {player} correctly guessed the word '{secret_word}'!")
+                        break
+            else:
+                print("Please enter a single letter.")
+ # Check if the player managed to use all their guesses
+
+            if len(guesses) >= max_guesses:
+                print(f"Player {player} has used all their guesses.")
+                break
+
+start()
